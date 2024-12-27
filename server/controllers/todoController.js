@@ -3,12 +3,12 @@ const Todo = require("../models/Todo");
 //create
 const addTodo= async (req, res) => {
     const { title, tags } = req.body
+    if (!title || !tags) {
+        return res.status(400).send("tite and tags are required")
+    }
     const titleExist=await Todo.findOne({title:title}).lean()
     if(titleExist){
         return res.status(400).send("title is not available")
-    }
-    if (!title || !tags) {
-        return res.status(400).send("tite and tags are required")
     }
     const tagsArray=tags.split(",")
     const todo = await Todo.create({title: title, tags: tagsArray });

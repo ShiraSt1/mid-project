@@ -8,7 +8,7 @@ const addUser= async (req, res) => {
         return res.status(400).send("userName is not available")
     }
     if (!name||!userName||!email||!address) {
-        return res.status(400).send("name is required")
+        return res.status(400).send("name and userName and email and address are required")
     }
     const user = await User.create({ name, userName, email, address, phone });
     const users=await User.find().lean()
@@ -39,12 +39,12 @@ const getUsers= async (req, res) => {
 //update
 const updateUser= async (req, res) => {
     const { id, name, userName, email, address, phone } = req.body
+    if (!name || !id ) {
+        return res.status(400).send("name and id are required")
+    }
     const usernameExist=await User.findOne({userName:userName}).lean()
     if(usernameExist && usernameExist._id!=id){
         return res.status(400).send("userName is not available")
-    }
-    if (!name || !id) {
-        return res.status(400).send("name and id are required")
     }
     const user = await User.findById(id).exec();
     if (!user) {

@@ -3,12 +3,12 @@ const Post = require("../models/Post");
 //create
 const addPost= async (req, res) => {
     const { title, body } = req.body
+    if (!title || !body) {
+        return res.status(400).send("tite and body are required")
+    }
     const titleExist=await Post.findOne({title:title}).lean()
     if(titleExist){
         return res.status(400).send("title is not available")
-    }
-    if (!title || !body) {
-        return res.status(400).send("tite is required")
     }
     const post = await Post.create({ title, body });
     const posts=await Post.find().lean()

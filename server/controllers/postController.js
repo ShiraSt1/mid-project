@@ -40,7 +40,7 @@ const getPosts= async (req, res) => {
 const updatePost= async (req, res) => {
     const { id, title, body } = req.body
     const titleExist=await Post.findOne({title:title}).lean()
-    if(titleExist && titleExist._id!=id){
+    if(titleExist && titleExist._id.toString()!=id){
         return res.status(400).send("title is not available")
     }
     if (!title || !id || !body) {

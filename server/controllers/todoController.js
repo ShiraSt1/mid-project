@@ -41,7 +41,7 @@ const getTodos= async (req, res) => {
 const updateTodo= async (req, res) => {
     const { id, title, tags, completed } = req.body
     const titleExist=await Todo.findOne({title:title}).lean()
-    if(titleExist && titleExist._id!=id){
+    if(titleExist && titleExist._id.toString()!=id){
         return res.status(400).send("if1")
     }
     if (!title || !id ||!tags) {

@@ -14,21 +14,6 @@ import DescriptionIcon from '@mui/icons-material/Description';
 const Home = () => {
     const navigate = useNavigate();
     const [value, setValue] = React.useState(0);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-        if (newValue === 0)//users
-        {
-            <Link to='/Users'>Users</Link>
-        }
-        if (newValue === 1)//posts
-        {
-            <Link to='/Posts'>Posts</Link>
-        }
-        if (newValue === 2)//tasks
-        {
-            <Link to='/Tasks'>Tasks</Link>
-        }
-    };
 
     const handleClickUser = () => {
         navigate('/Users')
@@ -51,7 +36,6 @@ const Home = () => {
                     orientation="vertical"
                     variant="scrollable"
                     value={value}
-                    onChange={handleChange}
                     aria-label="Vertical tabs example"
                     sx={{ borderRight: 1, borderColor: 'divider' }}>
                     <Tab icon={<HomeIcon />} label="home" onClick={handleClickHome} sx={{}}/>
